@@ -88,18 +88,12 @@ export async function login(req, res) {
     email:user.email
     });
 
-res.status(200).json({
+res.status(201).json({
     message: "Login successful",
     token,
     user
 });
-  res.status(201).json({
-    user: {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-    },
-  });
+
 }
 
 export async function logout(_req, res) {
