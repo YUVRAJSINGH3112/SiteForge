@@ -45,6 +45,7 @@ export function AppContextProvider({children}){
         try {
             const { data } = await api.post("/api/auth/login", {email, password});
             setUser(data.user)
+            localStorage.setItem("token", res.data.token);
             toast.success("Welcome back!")
             navigate("/")
         } catch (err) {
@@ -59,6 +60,7 @@ export function AppContextProvider({children}){
         try {
             const { data } = await api.post("/api/auth/register", {name, email, password});
             setUser(data.user)
+            localStorage.setItem("token", res.data.token);
             toast.success("Account created successfully!")
             navigate("/")
         } catch (err) {
@@ -73,6 +75,7 @@ export function AppContextProvider({children}){
         try {
             await api.post("/api/auth/logout")
             setUser(null)
+            localStorage.removeItem("token");
             setProjects([])
             setActiveProject(null)
             toast.success("Logged out successfully")
